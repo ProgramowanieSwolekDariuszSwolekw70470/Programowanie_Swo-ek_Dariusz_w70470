@@ -1,0 +1,39 @@
+<style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: "Inter", sans-serif;
+            box-sizing: border-box;
+        }
+        h1{
+            font-size: 50px;
+        }
+        h4{
+            font-size:30px;
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            background-color: #f0f0f0; 
+            top: 0;
+            left: 0;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            box-shadow: 0 0 10px 2px #aaa; 
+            padding: 20px 120px; 
+            z-index: 100; 
+        }       
+        header nav ul li:first-child a {
+            color: red; /* kolor wyróżniający dla "Strona główna" */
+        }
+        section{
+            margin-top: 0px;
+        }
+        article, section {
+            display: block; /* ustawienie jako pudełko */
+            margin: 0 120px; /* margines wewnętrzny górny i dolny na 0, prawy i lewy na 120px */
+            font-size: 20px; /* rozmiar czcionki na 20px */
+        }
+
+</style>
