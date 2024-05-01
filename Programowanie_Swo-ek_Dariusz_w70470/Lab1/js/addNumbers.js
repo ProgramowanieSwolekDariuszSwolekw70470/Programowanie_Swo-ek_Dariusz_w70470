@@ -10,5 +10,5 @@ function addTwoNumbers() {
     var sum = number1 + number2;
     alert("Wynik dodawania: " + sum);
 
-    // document.getElementById('sumResult').textContent = "Wynik dodawania: " + sum;
+    document.getElementById('sumResult').textContent = "Wynik dodawania: " + sum;
 }

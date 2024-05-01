@@ -1,5 +1,4 @@
 function canFormTriangle(a, b, c) {
-    // Sprawdzenie nierówności trójkąta
     return (a + b > c) && (a + c > b) && (b + c > a);
 }
 

@@ -6,7 +6,6 @@ function greetUser() {
         alert("Nie podano imienia.");
     }
 }
-
 window.onload = function() {
     greetUser();
 };
