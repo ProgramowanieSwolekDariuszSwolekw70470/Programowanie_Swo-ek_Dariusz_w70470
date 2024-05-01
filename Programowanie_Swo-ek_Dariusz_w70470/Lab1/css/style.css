@@ -25,15 +25,33 @@
             z-index: 100; 
         }       
         header nav ul li:first-child a {
-            color: red; /* kolor wyróżniający dla "Strona główna" */
-        }
-        section{
-            margin-top: 0px;
+            color: red; 
         }
         article, section {
-            display: block; /* ustawienie jako pudełko */
-            margin: 0 120px; /* margines wewnętrzny górny i dolny na 0, prawy i lewy na 120px */
-            font-size: 20px; /* rozmiar czcionki na 20px */
+            display: block;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 120px;
+            margin-right: 120px;
+            font-size: 20px;
+            
         }
+        article {
+            position: relative; 
+            display: fixed; 
+            flex-direction: row; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 150px 120px; 
+        }
+        footer {
+            background-color: #f2f2f2; 
+            color: #333; 
+            text-align: center; 
+            padding: 20px 0; 
+            font-size: 16px; 
+            border-top: 1px solid #ccc; 
+        }
+        
 
 </style>

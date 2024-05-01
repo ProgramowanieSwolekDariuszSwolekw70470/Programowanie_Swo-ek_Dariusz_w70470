@@ -2,17 +2,18 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Dariusz Swołek</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/greetUser.js"></script>
 
 </head>
-<body>
 
 <body>
     <header>
         <h1>Dariusz Swołek</h1>
         <nav>
             <ul>
+                <div id="clock"></div> 
+                <script src ="js/time.js"></script>
                 <li id="home-link"><a href="index.html">Strona główna</a></li>
                 <li><a href="seriale.html">Ulubione seriale</a></li>
                 <li><a href="ksiazki.html">Ulubione książki</a></li>
@@ -20,8 +21,6 @@
         </nav>
     </header>
     <!-- Reszta treści strony głównej -->
-
-<script> src="scripts.js"</script>
 <p id="wynik"></p>
 <section>
     <article>
@@ -45,21 +44,29 @@
     </aside>
 </section>
 
-<p id="Zad3d">
-    Miejsce na wynik z dodawania
-</p>
-<p id ="Zad3o">
-    Miejsce na wynik odejmowania
-</p>
-</p>
-<p id ="Zad3m">
-    Miejsce na wynik mnozenia
-</p>
-</p>
-<p id ="Zad3dz">
-    Miejsce na wynik dzielenia
-</p>
+    <h1>Zadania matematyczne</h1>
+    <h2>Oblicz pole trójkąta</h2>
+    <input id="sideA" type="number" placeholder="Podaj bok a">
+    <input id="sideB" type="number" placeholder="Podaj bok b">
+    <input id="sideC" type="number" placeholder="Podaj bok c">
+    <button onclick="calculateTriangleArea(Number(document.getElementById('sideA').value), Number(document.getElementById('sideB').value), Number(document.getElementById('sideC').value))">Oblicz pole</button>
+    <div id="result"></div>
+    <script src="js/CalculateTriangleArea.js"></script>
 
+    <h2>Dodaj dwie liczby całkowite</h2>
+    <button onclick="addTwoNumbers()">Podaj liczby i dodaj</button>
+    <div id="sumResult"></div>
+    <script src="js/addNumbers.js"></script>
+
+    <h2>Znajdź największą z trzech liczb</h2>
+    <button onclick="findMaxNumber()">Wprowadź liczby</button>
+    <div style="margin-top: 20px;" id="result1"></div> <!-- Miejsce na wynik -->
+    <script src="js/findMaxNumber.js"></script>
+
+    <h2>Znajdź największy wspólny dzielnik dwóch liczb całkowitych</h2>
+    <button onclick="findGCD()">Podaj liczby</button>
+    <div id="result2"></div>
+    <script src ="js/gcd.js"></script>
 
 
 <section>
@@ -110,11 +117,12 @@
 <section>
 <img src="https://tdc.pl/cp_9585.webp?i=0&rel=www" alt="Litera D" width="200" height="200" />
 </section>
+<footer>
+    <p> Pozdrawiam.</p>
+</footer>
 
 
 
-
-
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
