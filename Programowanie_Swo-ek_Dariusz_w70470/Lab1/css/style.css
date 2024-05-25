@@ -82,6 +82,22 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        .registration-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .registration-form label, .registration-form input, .registration-form select {
+            margin: 5px 0;
+        }
+        .registration-form button {
+            margin-top: 10px;
+        }
         
 
 </style>
