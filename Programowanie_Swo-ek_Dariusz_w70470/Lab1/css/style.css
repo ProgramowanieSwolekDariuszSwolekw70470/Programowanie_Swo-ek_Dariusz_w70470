@@ -92,12 +92,21 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-        .registration-form label, .registration-form input, .registration-form select {
+        .registration-form label, .registration-form input, .registration-form select, .registration-form span {
             margin: 5px 0;
+        }
+        .registration-form span {
+            color: red;
+            font-size: 0.9em;
+            display: none;
         }
         .registration-form button {
             margin-top: 10px;
         }
+        .hidden {
+            display: none;
+        }
+       
         
 
 </style>

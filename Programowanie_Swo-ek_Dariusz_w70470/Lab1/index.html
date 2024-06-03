@@ -43,6 +43,7 @@
         <hr>
     </article>
     <button id="button1">Przycisk 1</button>
+    <button id="button4" onclick="hideButton1()">Ukryj button1</button>
     <button id="button2">Przycisk 2</button>
     <button id="button3">Przycisk 3</button>
     <aside>
@@ -78,7 +79,7 @@
     <button onclick="findGCD()">Podaj liczby</button>
     <div id="result2"></div>
     <script src ="js/gcd.js"></script>
-    <script src="js/newyear.js"></script>
+    <script src="js/html4.js"></script>
 
 
 <section>
@@ -132,19 +133,86 @@
     <button id="addButton" onclick="addItem()">Dodaj do listy</button>
 
     <ul id="itemList">
-        <!-- Lista dodanych elementów -->
     </ul>
 </section>
 
 <section>
+    <h2>Zadanie 7</h2>
     <input type="text" id="firstNameInput" placeholder="Wpisz imię">
     <input type="text" id="lastNameInput" placeholder="Wpisz nazwisko">
     <button id="addButton" onclick="addToTable()">Dodaj do tabeli</button>
 
+    <table id="dataTable" border="1">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-
-    
 </section>
+
+<div class="temperature-converter">
+    <h2>Konwerter temperatury</h2>
+    <input type="number" id="temperatureInput" placeholder="Wpisz temperaturę">
+    <br>
+    <button onclick="convertToFahrenheit()">Na Fahrenheita</button>
+    <button onclick="convertToCelsius()">Na Celsjusza</button>
+    <div id="resul" class="resul"></div>
+</div>
+
+    <form id="registrationForm" class="registration-form">
+        <label for="fname">Imię:</label>
+        <input type="text" id="fname" name="fname" required>
+        <span id="fnameError"></span>
+        
+        <label for="lname">Nazwisko:</label>
+        <input type="text" id="lname" name="lname" required>
+        <span id="lnameError"></span>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError"></span>
+        
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" required>
+        <span id="passwordError"></span>
+
+        <label for="confirmPassword">Powtórz hasło:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <span id="confirmPasswordError"></span>
+        
+        <label for="gender">Płeć:</label>
+        <select id="gender" name="gender" required>
+            <option value="">Wybierz...</option>
+            <option value="male">Mężczyzna</option>
+            <option value="female">Kobieta</option>
+            <option value="other">Inna</option>
+        </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="phone">Telefon:</label></td>
+                <td><input type="tel" id="phone" name="phone" required pattern="[0-9]{9}"></td>
+            </tr>
+            <tr>
+                <td><label for="birthDate">Data Urodzenia:</label></td>
+                <td><input type="date" id="birthDate" name="birthDate" required></td>
+            </tr>
+            <tr>
+                <td><label for="country">Kraj:</label></td>
+                <td><input type="text" id="country" name="country" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Zarejestruj się</button></td>
+            </tr>
+        </table>
+    </form>
+
+
 <section>
 <img src="https://tdc.pl/cp_9585.webp?i=0&rel=www" alt="Litera D" width="200" height="200" />
 </section>
