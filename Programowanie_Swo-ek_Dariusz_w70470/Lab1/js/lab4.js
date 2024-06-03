@@ -1,3 +1,4 @@
+//zad1
 // function countdown() {
 //     for (let i = 10; i >= 0; i--) {
 //       setTimeout(function() {
@@ -23,6 +24,7 @@
   
 //   countdown();
 
+//zad2
 // function factorial(n) {
 //     if (n < 0) {
 //       return 'Silnia nie istnieje dla liczb ujemnych';
@@ -36,6 +38,7 @@
   
 // console.log(factorial(5));
 
+//zad3
 // Funkcja, która uruchamia się przy otwarciu strony
 // window.onload = function() {
 //     checkAgeAndRedirect();
@@ -59,7 +62,7 @@
 //   }
   
 
-
+//zad4
   // const buttons = document.querySelectorAll('button');
   
   // buttons.forEach(button => {
@@ -73,12 +76,12 @@
   //   });
   // });
 
-
+//zad5
   function hideButton1() {
     var button1 = document.getElementById('button1');
     button1.style.display = 'none';
 }
-
+//zad6
 function addItem() {
   var input = document.getElementById('textInput');
   var value = input.value;
@@ -93,6 +96,7 @@ function addItem() {
   }
 }
 
+//zad7
 function addToTable() {
   var firstName = document.getElementById('firstNameInput').value;
   var lastName = document.getElementById('lastNameInput').value;
@@ -112,6 +116,7 @@ function addToTable() {
   }
 }
 
+//zad8
 function convertToFahrenheit() {
   var celsius = parseFloat(document.getElementById('temperatureInput').value);
   if (!isNaN(celsius)) {
