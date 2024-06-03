@@ -66,7 +66,7 @@
   //   button.addEventListener('click', function() {
   //     // Resetuj kolor tła wszystkich przycisków
   //     buttons.forEach(btn => {
-  //       btn.style.backgroundColor = ''; // Reset do domyślnego koloru
+  //       btn.style.backgroundColor = ''; 
   //     });
   //     // Zmień kolor tła klikniętego przycisku
   //     this.style.backgroundColor = 'green';
@@ -89,7 +89,7 @@ function addItem() {
       listItem.textContent = value;
       list.appendChild(listItem);
 
-      input.value = ""; // Wyczyszczenie pola tekstowego po dodaniu elementu
+      input.value = ""; 
   }
 }
 

@@ -1,400 +1,185 @@
-<script>
-        document.getElementById('registrationForm').addEventListener('input', function(event) {
-            validateField(event.target);
-            handleFieldVisibility();
-        });
-
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            var formIsValid = true;
-            var elements = event.target.elements;
-
-            for (var i = 0; i < elements.length; i++) {
-                if (!validateField(elements[i])) {
-                    formIsValid = false;
-                }
-            }
-
-            if (formIsValid) {
-                alert('Formularz został poprawnie wypełniony.');
-            } else {
-                event.preventDefault();
-            }
-        });
-
-        document.getElementById('adresKorespondencyjnyCheckbox').addEventListener('change', function() {
-            handleFieldVisibility();
-        });
-
-        function handleFieldVisibility() {
-            var countryField = document.getElementById('country');
-            var wojewodztwoTextField = document.getElementById('wojewodztwoText');
-            var wojewodztwoSelectField = document.getElementById('wojewodztwoSelect');
-            var adresZamieszkaniaField = document.getElementById('adresZamieszkania');
-            var adresKorespondencyjnyCheckbox = document.getElementById('adresKorespondencyjnyCheckbox');
-            var adresKorespondencyjnyField = document.getElementById('adresKorespondencyjny');
-
-            if (countryField.value.trim().toLowerCase() === 'polska') {
-                wojewodztwoTextField.classList.add('hidden');
-                wojewodztwoTextField.removeAttribute('name');
-                wojewodztwoSelectField.classList.remove('hidden');
-                wojewodztwoSelectField.setAttribute('name', 'wojewodztwo');
-                wojewodztwoSelectField.required = true;
-            } else {
-                wojewodztwoSelectField.classList.add('hidden');
-                wojewodztwoSelectField.removeAttribute('name');
-                wojewodztwoSelectField.required = false;
-                wojewodztwoTextField.classList.remove('hidden');
-                wojewodztwoTextField.setAttribute('name', 'wojewodztwo');
-                wojewodztwoTextField.required = true;
-            }
-
-            if (countryField.value.trim() !== '') {
-                document.querySelector('label[for="wojewodztwo"]').classList.remove('hidden');
-            } else {
-                document.querySelector('label[for="wojewodztwo"]').classList.add('hidden');
-                if (wojewodztwoTextField) wojewodztwoTextField.classList.add('hidden');
-                if (wojewodztwoSelectField) wojewodztwoSelectField.classList.add('hidden');
-            }
-
-            if (wojewodztwoTextField.value.trim() !== '' || wojewodztwoSelectField.value.trim() !== '') {
-                adresZamieszkaniaField.classList.remove('hidden');
-                document.querySelector('label[for="adresZamieszkania"]').classList.remove('hidden');
-            } else {
-                adresZamieszkaniaField.classList.add('hidden');
-                document.querySelector('label[for="adresZamieszkania"]').classList.add('hidden');
-            }
-
-            if (adresKorespondencyjnyCheckbox.checked) {
-                adresKorespondencyjnyField.classList.add('hidden');
-                document.querySelector('label[for="adresKorespondencyjny"]').classList.add('hidden');
-            } else {
-                adresKorespondencyjnyField.classList.remove('hidden');
-                document.querySelector('label[for="adresKorespondencyjny"]').classList.remove('hidden');
-            }
-        }
-
-        function validateField(field) {
-            var valid = true;
-            var errorSpan = document.getElementById(field.id + 'Error');
-
-            if (field.id === 'password' || field.id === 'confirmPassword') {
-                valid = validatePassword(field, errorSpan);
-                if (field.id === 'confirmPassword') {
-                    valid = validateConfirmPassword(field, errorSpan);
-                }
-            } else if (field.id === 'email') {
-                valid = validateEmail(field, errorSpan);
-            } else if (field.id === 'fname' || field.id === 'lname' || field.id === 'country' || field.id === 'phone' || field.id === 'birthdate' || field.id === 'gender' || field.id === 'wojewodztwoText' || field.id === 'adresZamieszkania' || field.id === 'adresKorespondencyjny' || field.id === 'wojewodztwoSelect') {
-                valid = checkValue(field, errorSpan);
-            }
-
-            if (field.id === 'birthdate') {
-                valid = validateBirthdate(field, errorSpan);
-            }
-
-            return valid;
-        }
-
-        function checkValue(field, errorSpan) {
-            if (!field.value.trim()) {
-                errorSpan.textContent = 'To pole jest wymagane.';
-                errorSpan.style.display = 'block';
-                field.setCustomValidity('To pole jest wymagane.');
-                return false;
-            } else {
-                errorSpan.style.display = 'none';
-                field.setCustomValidity('');
-                return true;
-            }
-        }
-
-        function checkLength(field, minLength, errorSpan) {
-            if (field.value.length < minLength) {
-                errorSpan.textContent = 'To pole musi mieć co najmniej ' + minLength + ' znaków.';
-                errorSpan.style.display = 'block';
-                field.setCustomValidity('To pole musi mieć co najmniej ' + minLength + ' znaków.');
-                return false;
-            } else {
-                errorSpan.style.display = 'none';
-                field.setCustomValidity('');
-                return true;
-            }
-        }
-
-        function validateEmail(field, errorSpan) {
-            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (!emailPattern.test(field.value)) {
-                errorSpan.textContent = 'Wprowadź poprawny adres email.';
-                errorSpan.style.display = 'block';
-                field.setCustomValidity('Wprowadź poprawny adres email.');
-                return false;
-            } else {
-                errorSpan.style.display = 'none';
-                field.setCustomValidity('');
-                return true;
-            }
-        }
-
-        function validatePassword(field, errorSpan) {
-            if (!checkLength(field, 8, errorSpan)) {
-                return false;
-            }
-            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordPattern.test(field.value)) {
-                errorSpan.textContent = 'Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę, jedną cyfrę i jeden znak specjalny.';
-                errorSpan.style.display = 'block';
-                field.setCustomValidity('Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę, jedną cyfrę i jeden znak specjalny.');
-                return false;
-            } else {
-                errorSpan.style.display = 'none';
-                field.setCustomValidity('');
-                return true;
-            }
-        }
-
-        function validateConfirmPassword(field, errorSpan) {
-            var password = document.getElementById('password').value;
-            if (field.value !== password) {
-                errorSpan.textContent = 'Hasła muszą być takie same.';
-                errorSpan.style.display = 'block';
-                field.setCustomValidity('Hasła muszą być takie same.');
-                return false;
-            } else {
-                errorSpan.style.display = 'none';
-                field.setCustomValidity('');
-                return true;
-            }
-        }
-
-        function validateBirthdate(field, errorSpan) {
-            var birthdate = new Date(field.value);
-            var today = new Date();
-            var age = today.getFullYear() - birthdate.getFullYear();
-            var monthDiff = today.getMonth() - birthdate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
-                age--;
-            }
-
-            if (age < 18) {
-                errorSpan.textContent = 'Musisz mieć ukończone 18 lat.';
-                errorSpan.style.display = 'block';
-                field.setCustomValidity('Musisz mieć ukończone 18 lat.');
-                return false;
-            } else {
-                errorSpan.style.display = 'none';
-                field.setCustomValidity('');
-                return true;
-            }
-        }
-
-        document.getElementById('phone').addEventListener('input', function(event) {
-            var input = event.target;
-            input.value = input.value.replace(/\D/g, '');
-        });
-    </script>
-</body>
-</html>
-Wyjaśnienia:
-Pole "Województwo": Zmieniamy atrybuty name i class elementów input i select, aby tylko jeden z nich był widoczny i aktywny w danym momencie.
-Skrypt JavaScript: handleFieldVisibility zmienia widoczność i wymagane atrybuty pól w zależności od wartości pola "Kraj". Dodane zostało dynamiczne zarządzanie atrybutami name i required.
-Ten kod powinien poprawnie zarządzać widocznością i typem pola "Województwo" oraz ograniczać wpisywanie wartości w polu "Telefon" do cyfr.
-
-co musi byc wpisane w kraj zeby wyswietlily sie wojewodztwa?
-ChatGPT
-Aby wyświetliły się województwa, w polu "Kraj" musi być wpisane "Polska" (niezależnie od wielkości liter). Skrypt JavaScript sprawdza wartość tego pola i wyświetla pole "Województwo" tylko wtedy, gdy wartość to "Polska".
-
-Skrypt JavaScript:
-javascript
-Skopiuj kod
-document.getElementById('registrationForm').addEventListener('input', function(event) {
-    validateField(event.target);
-    handleFieldVisibility();
-});
-
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    var formIsValid = true;
-    var elements = event.target.elements;
+    event.preventDefault();
+    if (validateForm()) {
+        alert('Formularz został poprawnie wypełniony!');
+    }
+});
 
-    for (var i = 0; i < elements.length; i++) {
-        if (!validateField(elements[i])) {
-            formIsValid = false;
+document.getElementById('country').addEventListener('change', function() {
+    const countryValue = this.value.trim();
+    const provinceText = document.getElementById('provinceText');
+    const provinceSelect = document.getElementById('provinceSelect');
+    
+    if (countryValue.toLowerCase() === 'polska') {
+        provinceText.classList.add('hidden');
+        provinceText.disabled = true;
+        provinceSelect.classList.remove('hidden');
+        provinceSelect.disabled = false;
+    } else {
+        provinceText.classList.remove('hidden');
+        provinceText.disabled = false;
+        provinceSelect.classList.add('hidden');
+        provinceSelect.disabled = true;
+    }
+});
+
+document.getElementById('provinceSelect').addEventListener('change', function() {
+    const provinceValue = this.value.trim();
+    const address = document.getElementById('address');
+    const correspondenceAddress = document.getElementById('correspondenceAddress');
+    if (provinceValue) {
+        address.classList.remove('hidden');
+        address.disabled = false;
+        correspondenceAddress.disabled = false;
+    } else {
+        address.classList.add('hidden');
+        address.disabled = true;
+        correspondenceAddress.disabled = true;
+    }
+});
+
+document.getElementById('provinceText').addEventListener('input', function() {
+    const provinceValue = this.value.trim();
+    const address = document.getElementById('address');
+    const correspondenceAddress = document.getElementById('correspondenceAddress');
+    if (provinceValue) {
+        address.classList.remove('hidden');
+        address.disabled = false;
+        correspondenceAddress.disabled = false;
+    } else {
+        address.classList.add('hidden');
+        address.disabled = true;
+        correspondenceAddress.disabled = true;
+    }
+});
+
+document.getElementById('sameAddress').addEventListener('change', function() {
+    const isChecked = this.checked;
+    const correspondenceAddressRow = document.getElementById('correspondenceAddressRow');
+    const correspondenceAddress = document.getElementById('correspondenceAddress');
+    if (isChecked) {
+        correspondenceAddressRow.classList.add('hidden');
+        correspondenceAddress.disabled = true;
+    } else {
+        correspondenceAddressRow.classList.remove('hidden');
+        correspondenceAddress.disabled = false;
+    }
+});
+
+function hasValue(input) {
+    return input.value.trim() !== '';
+}
+
+function hasMinLength(input, minLength) {
+    return input.value.length >= minLength;
+}
+
+function isValidEmail(input) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(input.value);
+}
+
+function isStrongPassword(input) {
+    return input.value.length >= 8;
+}
+
+function isAdult(input) {
+    const birthDate = new Date(input.value);
+    const today = new Date();
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        return age - 1 >= 18;
+    }
+    return age >= 18;
+}
+
+function passwordsMatch(password, confirmPassword) {
+    return password.value === confirmPassword.value;
+}
+
+function validateForm() {
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const gender = document.getElementById('gender');
+    const phone = document.getElementById('phone');
+    const birthDate = document.getElementById('birthDate');
+    const country = document.getElementById('country');
+    const provinceText = document.getElementById('provinceText');
+    const provinceSelect = document.getElementById('provinceSelect');
+    const address = document.getElementById('address');
+
+    if (!hasValue(firstName)) {
+        alert('Proszę podać imię.');
+        firstName.focus();
+        return false;
+    }
+    if (!hasValue(lastName)) {
+        alert('Proszę podać nazwisko.');
+        lastName.focus();
+        return false;
+    }
+    if (!isValidEmail(email)) {
+        alert('Proszę podać poprawny adres email.');
+        email.focus();
+        return false;
+    }
+    if (!isStrongPassword(password)) {
+        alert('Hasło musi zawierać co najmniej 8 znaków.');
+        password.focus();
+        return false;
+    }
+    if (!passwordsMatch(password, confirmPassword)) {
+        alert('Hasła nie są zgodne.');
+        confirmPassword.focus();
+        return false;
+    }
+    if (!hasValue(gender)) {
+        alert('Proszę wybrać płeć.');
+        gender.focus();
+        return false;
+    }
+    if (!hasValue(phone)) {
+        alert('Proszę podać numer telefonu.');
+        phone.focus();
+        return false;
+    }
+    if (!hasValue(birthDate)) {
+        alert('Proszę podać datę urodzenia.');
+        birthDate.focus();
+        return false;
+    }
+    if (!isAdult(birthDate)) {
+        alert('Musisz być pełnoletni, aby się zarejestrować.');
+        birthDate.focus();
+        return false;
+    }
+    if (!hasValue(country)) {
+        alert('Proszę podać kraj.');
+        country.focus();
+        return false;
+    }
+    if (country.value.toLowerCase() === 'polska') {
+        if (!hasValue(provinceSelect)) {
+            alert('Proszę wybrać województwo.');
+            provinceSelect.focus();
+            return false;
+        }
+    } else {
+        if (!hasValue(provinceText)) {
+            alert('Proszę podać województwo.');
+            provinceText.focus();
+            return false;
         }
     }
-
-    if (formIsValid) {
-        alert('Formularz został poprawnie wypełniony.');
-    } else {
-        event.preventDefault();
-    }
-});
-
-document.getElementById('adresKorespondencyjnyCheckbox').addEventListener('change', function() {
-    handleFieldVisibility();
-});
-
-function handleFieldVisibility() {
-    var countryField = document.getElementById('country');
-    var wojewodztwoTextField = document.getElementById('wojewodztwoText');
-    var wojewodztwoSelectField = document.getElementById('wojewodztwoSelect');
-    var adresZamieszkaniaField = document.getElementById('adresZamieszkania');
-    var adresKorespondencyjnyCheckbox = document.getElementById('adresKorespondencyjnyCheckbox');
-    var adresKorespondencyjnyField = document.getElementById('adresKorespondencyjny');
-
-    if (countryField.value.trim().toLowerCase() === 'polska') {
-        wojewodztwoTextField.classList.add('hidden');
-        wojewodztwoTextField.removeAttribute('name');
-        wojewodztwoSelectField.classList.remove('hidden');
-        wojewodztwoSelectField.setAttribute('name', 'wojewodztwo');
-        wojewodztwoSelectField.required = true;
-    } else {
-        wojewodztwoSelectField.classList.add('hidden');
-        wojewodztwoSelectField.removeAttribute('name');
-        wojewodztwoSelectField.required = false;
-        wojewodztwoTextField.classList.remove('hidden');
-        wojewodztwoTextField.setAttribute('name', 'wojewodztwo');
-        wojewodztwoTextField.required = true;
-    }
-
-    if (countryField.value.trim() !== '') {
-        document.querySelector('label[for="wojewodztwo"]').classList.remove('hidden');
-    } else {
-        document.querySelector('label[for="wojewodztwo"]').classList.add('hidden');
-        if (wojewodztwoTextField) wojewodztwoTextField.classList.add('hidden');
-        if (wojewodztwoSelectField) wojewodztwoSelectField.classList.add('hidden');
-    }
-
-    if (wojewodztwoTextField.value.trim() !== '' || wojewodztwoSelectField.value.trim() !== '') {
-        adresZamieszkaniaField.classList.remove('hidden');
-        document.querySelector('label[for="adresZamieszkania"]').classList.remove('hidden');
-    } else {
-        adresZamieszkaniaField.classList.add('hidden');
-        document.querySelector('label[for="adresZamieszkania"]').classList.add('hidden');
-    }
-
-    if (adresKorespondencyjnyCheckbox.checked) {
-        adresKorespondencyjnyField.classList.add('hidden');
-        document.querySelector('label[for="adresKorespondencyjny"]').classList.add('hidden');
-    } else {
-        adresKorespondencyjnyField.classList.remove('hidden');
-        document.querySelector('label[for="adresKorespondencyjny"]').classList.remove('hidden');
-    }
-}
-
-function validateField(field) {
-    var valid = true;
-    var errorSpan = document.getElementById(field.id + 'Error');
-
-    if (field.id === 'password' || field.id === 'confirmPassword') {
-        valid = validatePassword(field, errorSpan);
-        if (field.id === 'confirmPassword') {
-            valid = validateConfirmPassword(field, errorSpan);
-        }
-    } else if (field.id === 'email') {
-        valid = validateEmail(field, errorSpan);
-    } else if (field.id === 'fname' || field.id === 'lname' || field.id === 'country' || field.id === 'phone' || field.id === 'birthdate' || field.id === 'gender' || field.id === 'wojewodztwoText' || field.id === 'adresZamieszkania' || field.id === 'adresKorespondencyjny' || field.id === 'wojewodztwoSelect') {
-        valid = checkValue(field, errorSpan);
-    }
-
-    if (field.id === 'birthdate') {
-        valid = validateBirthdate(field, errorSpan);
-    }
-
-    return valid;
-}
-
-function checkValue(field, errorSpan) {
-    if (!field.value.trim()) {
-        errorSpan.textContent = 'To pole jest wymagane.';
-        errorSpan.style.display = 'block';
-        field.setCustomValidity('To pole jest wymagane.');
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        field.setCustomValidity('');
-        return true;
-    }
-}
-
-function checkLength(field, minLength, errorSpan) {
-    if (field.value.length < minLength) {
-        errorSpan.textContent = 'To pole musi mieć co najmniej ' + minLength + ' znaków.';
-        errorSpan.style.display = 'block';
-        field.setCustomValidity('To pole musi mieć co najmniej ' + minLength + ' znaków.');
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        field.setCustomValidity('');
-        return true;
-    }
-}
-
-function validateEmail(field, errorSpan) {
-    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(field.value)) {
-        errorSpan.textContent = 'Wprowadź poprawny adres email.';
-        errorSpan.style.display = 'block';
-        field.setCustomValidity('Wprowadź poprawny adres email.');
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        field.setCustomValidity('');
-        return true;
-    }
-}
-
-function validatePassword(field, errorSpan) {
-    if (!checkLength(field, 8, errorSpan)) {
+    if (!hasValue(address)) {
+        alert('Proszę podać adres zamieszkania.');
+        address.focus();
         return false;
     }
-    var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordPattern.test(field.value)) {
-        errorSpan.textContent = 'Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę, jedną cyfrę i jeden znak specjalny.';
-        errorSpan.style.display = 'block';
-        field.setCustomValidity('Hasło musi zawierać co najmniej jedną małą literę, jedną wielką literę, jedną cyfrę i jeden znak specjalny.');
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        field.setCustomValidity('');
-        return true;
-    }
+
+    return true;
 }
-
-function validateConfirmPassword(field, errorSpan) {
-    var password = document.getElementById('password').value;
-    if (field.value !== password) {
-        errorSpan.textContent = 'Hasła muszą być takie same.';
-        errorSpan.style.display = 'block';
-        field.setCustomValidity('Hasła muszą być takie same.');
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        field.setCustomValidity('');
-        return true;
-    }
-}
-
-function validateBirthdate(field, errorSpan) {
-    var birthdate = new Date(field.value);
-    var today = new Date();
-    var age = today.getFullYear() - birthdate.getFullYear();
-    var monthDiff = today.getMonth() - birthdate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
-        age--;
-    }
-
-    if (age < 18) {
-        errorSpan.textContent = 'Musisz mieć ukończone 18 lat.';
-        errorSpan.style.display = 'block';
-        field.setCustomValidity('Musisz mieć ukończone 18 lat.');
-        return false;
-    } else {
-        errorSpan.style.display = 'none';
-        field.setCustomValidity('');
-        return true;
-    }
-}
-
-document.getElementById('phone').addEventListener('input', function(event) {
-    var input = event.target;
-    input.value = input.value.replace(/\D/g, '');
-});

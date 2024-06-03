@@ -72,7 +72,7 @@
 
     <h2>Znajdź największą z trzech liczb</h2>
     <button onclick="findMaxNumber()">Wprowadź liczby</button>
-    <div style="margin-top: 20px;" id="result1"></div> <!-- Miejsce na wynik -->
+    <div style="margin-top: 20px;" id="result1"></div> 
     <script src="js/findMaxNumber.js"></script>
 
     <h2>Znajdź największy wspólny dzielnik dwóch liczb całkowitych</h2>
@@ -155,6 +155,7 @@
 
 </section>
 
+<section>
 <div class="temperature-converter">
     <h2>Konwerter temperatury</h2>
     <input type="number" id="temperatureInput" placeholder="Wpisz temperaturę">
@@ -163,35 +164,40 @@
     <button onclick="convertToCelsius()">Na Celsjusza</button>
     <div id="resul" class="resul"></div>
 </div>
+</section>
 
-    <form id="registrationForm" class="registration-form">
-        <label for="fname">Imię:</label>
-        <input type="text" id="fname" name="fname" required>
-        <span id="fnameError"></span>
-        
-        <label for="lname">Nazwisko:</label>
-        <input type="text" id="lname" name="lname" required>
-        <span id="lnameError"></span>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <span id="emailError"></span>
-        
-        <label for="password">Hasło:</label>
-        <input type="password" id="password" name="password" required>
-        <span id="passwordError"></span>
 
-        <label for="confirmPassword">Powtórz hasło:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-        <span id="confirmPasswordError"></span>
-        
-        <label for="gender">Płeć:</label>
-        <select id="gender" name="gender" required>
-            <option value="">Wybierz...</option>
-            <option value="male">Mężczyzna</option>
-            <option value="female">Kobieta</option>
-            <option value="other">Inna</option>
-        </select>
+<section>
+    <form id="registrationForm" class="custom-form">
+        <table>
+            <tr>
+                <td><label for="firstName">Imię:</label></td>
+                <td><input type="text" id="firstName" name="firstName" required></td>
+            </tr>
+            <tr>
+                <td><label for="lastName">Nazwisko:</label></td>
+                <td><input type="text" id="lastName" name="lastName" required></td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="email" id="email" name="email" required></td>
+            </tr>
+            <tr>
+                <td><label for="password">Hasło:</label></td>
+                <td><input type="password" id="password" name="password" required></td>
+            </tr>
+            <tr>
+                <td><label for="confirmPassword">Powtórz hasło:</label></td>
+                <td><input type="password" id="confirmPassword" name="confirmPassword" required></td>
+            </tr>
+            <tr>
+                <td><label for="gender">Płeć:</label></td>
+                <td>
+                    <select id="gender" name="gender" required>
+                        <option value="male">Mężczyzna</option>
+                        <option value="female">Kobieta</option>
+                        <option value="other">Inne</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -206,13 +212,53 @@
                 <td><label for="country">Kraj:</label></td>
                 <td><input type="text" id="country" name="country" required></td>
             </tr>
+            <tr id="provinceRow">
+                <td><label for="province">Województwo:</label></td>
+                <td>
+                    <input type="text" id="provinceText" name="provinceText" class="hidden" disabled>
+                    <select id="provinceSelect" name="provinceSelect" class="hidden" disabled>
+                        <option value="">Wybierz województwo</option>
+                        <option value="dolnośląskie">Dolnośląskie</option>
+                        <option value="kujawsko-pomorskie">Kujawsko-pomorskie</option>
+                        <option value="lubelskie">Lubelskie</option>
+                        <option value="lubuskie">Lubuskie</option>
+                        <option value="łódzkie">Łódzkie</option>
+                        <option value="małopolskie">Małopolskie</option>
+                        <option value="mazowieckie">Mazowieckie</option>
+                        <option value="opolskie">Opolskie</option>
+                        <option value="podkarpackie">Podkarpackie</option>
+                        <option value="podlaskie">Podlaskie</option>
+                        <option value="pomorskie">Pomorskie</option>
+                        <option value="śląskie">Śląskie</option>
+                        <option value="świętokrzyskie">Świętokrzyskie</option>
+                        <option value="warmińsko-mazurskie">Warmińsko-mazurskie</option>
+                        <option value="wielkopolskie">Wielkopolskie</option>
+                        <option value="zachodniopomorskie">Zachodniopomorskie</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="address">Adres zamieszkania:</label></td>
+                <td><input type="text" id="address" name="address" class="hidden" disabled></td>
+            </tr>
+            <tr>
+                <td><label for="sameAddress">Adres korespondencyjny jest taki sam jak adres zamieszkania:</label></td>
+                <td><input type="checkbox" id="sameAddress" name="sameAddress" checked></td>
+            </tr>
+            <tr id="correspondenceAddressRow" class="hidden">
+                <td><label for="correspondenceAddress">Adres korespondencyjny:</label></td>
+                <td><input type="text" id="correspondenceAddress" name="correspondenceAddress" disabled></td>
+            </tr>
             <tr>
                 <td colspan="2"><button type="submit">Zarejestruj się</button></td>
             </tr>
         </table>
     </form>
+    
+    <script src="js/form.js"></script>
+</section>
 
-
+1
 <section>
 <img src="https://tdc.pl/cp_9585.webp?i=0&rel=www" alt="Litera D" width="200" height="200" />
 </section>

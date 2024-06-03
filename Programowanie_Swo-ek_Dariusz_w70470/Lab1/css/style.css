@@ -1,112 +1,147 @@
-<style>
-        body{
-            margin: 0;
-            padding: 0;
-            font-family: "Inter", sans-serif;
-            box-sizing: border-box;
-        }
-        h1{
-            font-size: 50px;
-        }
-        h4{
-            font-size:30px;
-        }
-        header {
-            position: fixed;
-            width: 100%;
-            background-color: #f0f0f0; 
-            top: 0;
-            left: 0;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            box-shadow: 0 0 10px 2px #aaa; 
-            padding: 20px 120px; 
-            z-index: 100; 
-        }       
-        header nav ul li:first-child a {
-            color: red; 
-        }
-        article, section {
-            display: block;
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: 120px;
-            margin-right: 120px;
-            font-size: 20px;
-            
-        }
-        article {
-            position: relative; 
-            display: fixed; 
-            flex-direction: row; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 150px 120px; 
-        }
-        footer {
-            background-color: #f2f2f2; 
-            color: #333; 
-            text-align: center; 
-            padding: 20px 0; 
-            font-size: 16px; 
-            border-top: 1px solid #ccc; 
-        }
-        .temperature-converter {
-            font-family: Arial, sans-serif;
-            max-width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .temperature-converter input[type="number"] {
-            width: 80%;
-            padding: 5px;
-            margin: 10px 0;
-        }
-        .temperature-converter button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-        }
-        .temperature-converter button:hover {
-            background-color: #0056b3;
-        }
-        .temperature-converter .result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .registration-form {
-            display: flex;
-            flex-direction: column;
-            max-width: 400px;
-            margin: auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .registration-form label, .registration-form input, .registration-form select, .registration-form span {
-            margin: 5px 0;
-        }
-        .registration-form span {
-            color: red;
-            font-size: 0.9em;
-            display: none;
-        }
-        .registration-form button {
-            margin-top: 10px;
-        }
-        .hidden {
-            display: none;
-        }
-       
-        
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+}
 
-</style>
+h1 {
+    font-size: 50px;
+}
+
+h4 {
+    font-size: 30px;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    background-color: #f0f0f0;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px 2px #aaa;
+    padding: 20px 120px;
+    z-index: 100;
+}
+
+header nav ul li:first-child a {
+    color: red;
+}
+
+article,
+section {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 120px;
+    margin-right: 120px;
+    font-size: 20px;
+
+}
+
+article {
+    position: relative;
+    display: fixed;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 150px 120px;
+}
+
+footer {
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 16px;
+    border-top: 1px solid #ccc;
+}
+
+.temperature-converter {
+    font-family: Arial, sans-serif;
+    max-width: 300px;
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.temperature-converter input[type="number"] {
+    width: 80%;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.temperature-converter button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+.temperature-converter button:hover {
+    background-color: #0056b3;
+}
+
+.temperature-converter .result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.custom-form {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 40px;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.custom-form table {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+.custom-form td, .custom-form th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.custom-form th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+.custom-form tr:hover {
+    background-color: #f1f1f1;
+}
+
+.custom-form tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-form input, .custom-form select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.custom-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.custom-form button:hover {
+    background-color: #45a049;
+}
